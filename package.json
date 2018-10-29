@@ -1,0 +1,19 @@
+{
+  "name": "explode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdulgafarjagun/explode.git"
+  },
+  "author": "Abdulgafar Jagun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdulgafarjagun/explode/issues"
+  },
+  "homepage": "https://github.com/abdulgafarjagun/explode#readme"
+}
