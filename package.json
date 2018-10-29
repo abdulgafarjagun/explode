@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter progress server/test_setup.js \"./**/*.spec.js\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/abdulgafarjagun/explode/issues"
   },
-  "homepage": "https://github.com/abdulgafarjagun/explode#readme"
+  "homepage": "https://github.com/abdulgafarjagun/explode#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
 }
