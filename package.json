@@ -18,6 +18,7 @@
   "homepage": "https://github.com/abdulgafarjagun/explode#readme",
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^5.8.0",
     "mocha": "^5.2.0"
   },
   "dependencies": {}
