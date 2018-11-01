@@ -38,6 +38,16 @@ app.startServers = () => {
     );
 };
 
+//stop all servers in API application
+app.startServers = () => {
+    app.servers.forEach(
+        server => server.server.close(function(){
+            console.log('server stopped');
+        })
+    );
+};
+
+
 //handler object
 var handlers = {};
 
