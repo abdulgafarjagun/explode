@@ -39,7 +39,7 @@ app.startServers = () => {
 };
 
 //stop all servers in API application
-app.startServers = () => {
+app.stopServers = () => {
     app.servers.forEach(
         server => server.server.close(function(){
             console.log('server stopped');
