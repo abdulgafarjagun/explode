@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter progress --compilers js:babel-core/register server/test_setup.js \"./**/*.spec.js\"",
+    "test": "mocha --reporter progress --require babel-core/register server/test_setup.js \"./**/*.spec.js\"",
     "start": "nodemon --exec babel-node --presets env,stage-2 index.js"
   },
   "repository": {

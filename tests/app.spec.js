@@ -6,7 +6,7 @@ import http from 'http';
 
    
 
-describe('default route', function(){
+describe('test if app.startServers and app.stopServers is working', function(){
     before(function(){
         app.addServer(new serverWrapper(3001, 'http', 'server test started'));
         app.startServers();
