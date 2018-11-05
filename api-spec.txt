@@ -1,0 +1,29 @@
+'GET /acronym/' : {
+    'desc' : 'get all acronyms',
+    'response' : '200 application/json',
+    'data' : '{}, {}, {}'
+}
+
+'GET /acronym/:id' : {
+    'desc' : 'get single acronym by id',
+    'response' : '200 application/json',
+    'data' : '{}, {}, {}'
+}
+
+'POST /acronym/' : {
+    'desc' : 'create a new acronym',
+    'response' : '201 application/json',
+    'data' : '{}'
+}
+
+'PUT /acronym/:id' : {
+    'desc' : 'existing acronym',
+    'response' : '200 application/json',
+    'data' : '{}'
+}
+
+'DELETE /acronym/:id' : {
+    'desc' : 'delete an existing acronym',
+    'response' : '200 application/json',
+    'data' : '{}'
+}

@@ -2,6 +2,8 @@
 var http = require('http');
 var https = require('https');
 var service = require('./server/service');
+var handlers = require('./handlers/handler');
+var routes = require('./routes/router');
 
 
 //parent obect for API application
@@ -47,26 +49,6 @@ app.stopServers = () => {
     );
 };
 
-
-//handler object
-var handlers = {};
-
-//not found handler
-handlers.notFound = function(data, callback){
-    //callback with a status 404
-    callback(404);
-};
-
-//ping handler
-handlers.ping = function(data, callback){
-    //callback with a status 200
-    callback(200);
-};
-
-//define routes
-var routes = {
-    'ping': handlers.ping
-};
 
 
 module.exports = {app}
