@@ -13,20 +13,26 @@ var app = {
 
 //add new server to API application
 app.addServer = (server) => {
+
     //append server info to server message
-    server.message += 'type: ' +server.serverType+ ', port: ' +server.port;
+    server.message += 'type: ', server.serverType, ', port: ', server.port;
 
     //depending on severType create either http or https server
     server.server = typeof(server.serverType) == 'https'  ? https
+
     //for creating a new https server
     .createServer(server.serverOptions, function(req, res){
-        //pass the server request
+
+
         service(req, res, handlers, routes);
+
         //for creating a new http server
     }) : http.createServer(function(req,res){
-        //pass server request to core service along with response handlers and routes
+
+        
         service(req, res, handlers, routes);
     })
+
     //add server to array of servers
     app.servers.push(server);
 };

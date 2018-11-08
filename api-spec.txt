@@ -4,7 +4,7 @@
     'data' : '{}, {}, {}'
 }
 
-'GET /acronym/?search=query' : {
+'GET /acronym/search?q=query' : {
     'desc' : 'get all acronyms',
     'response' : '200 application/json',
     'data' : '{}, {}, {}'

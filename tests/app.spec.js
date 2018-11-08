@@ -2,21 +2,38 @@ import {expect} from 'chai'
 import {app} from '../app';
 import serverWrapper from '../server/serverwrapper';
 import http from 'http';
+import https from 'https';
 
 
    
 
 describe('test if app.startServers and app.stopServers is working', function(){
     before(function(){
+
+        var serverOptions = {
+            'key': fs.readFileSync('../server/https/key.pem'),
+            'cert': fs.readFileSync('../server/https/cert.pem')
+        }
+
         app.addServer(new serverWrapper(3001, 'http', 'server test started'));
+        app.addServer(new serverWrapper(5001, 'https', 'server test started', serverOptions));
+
         app.startServers();
     })
     after(function(){
         app.stopServers();
     })
-    it('should return status code 200', function(done){
+    it('http server should return status code 200', function(done){
         
         http.get('http://localhost:3001/ping', function(res){
+            expect(res.statusCode).to.equal(200);
+            done();
+        });
+    });
+
+    it('https server should return status code 200', function(done){
+        
+        https.get('https://localhost:5001/ping', function(res){
             expect(res.statusCode).to.equal(200);
             done();
         });
