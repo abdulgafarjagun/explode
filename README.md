@@ -1,4 +1,4 @@
 # explode
 start application:
 
-node index.js (default environment)
+npm start (default environment)
