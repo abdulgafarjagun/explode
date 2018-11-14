@@ -24,7 +24,7 @@ function Service(req, res, handlers, routes){
             path: parseUrl.pathname.replace(/^\/+|\/+$/g, ''),
             method : req.method.toLowerCase(),
             headers : req.headers,
-            queryStringObject : parseUrl.queryStringObject,
+            queryStringObject : parseUrl.query,
             payload : helpers.parseJsonToObj(dataChunks)
         }
 
