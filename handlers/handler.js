@@ -42,7 +42,22 @@ handlers.acronymMethods.post = function(data, callback) {
         //check if acronym already exists
         _data.read('acronym', model.acronym, function(err, data){
             if(!err){
-                callback(400, {"Error" : "this acronym already exists"});
+                //callback(400, {"Error" : "this acronym already exists"});
+                callback(400, {
+                    code : 400, 
+                    data: [
+                        {
+                            id: 76,
+                            name:'erhehrhe'
+                        },
+                        {
+                            id:883,
+                            name:'nsndns'
+                        }
+                    ],
+                    message:"this acronym already exists",
+                    status: 'fail'
+                });
             } else {
                 _data.create('acronym', model.acronym, model, function(err){
                     if(!err){
