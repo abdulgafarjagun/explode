@@ -28,6 +28,8 @@ function Service(req, res, handlers, routes){
             payload : helpers.parseJsonToObj(dataChunks)
         }
 
+        
+
         //handle the request depending on the request
         requestHandler(data, handlers, routes, req, res);
     })

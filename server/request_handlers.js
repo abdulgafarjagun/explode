@@ -4,7 +4,7 @@
 function handleRequests(requestData, handlers, routes, req, res){
 
     var chosenHandler = typeof(routes[requestData.path]) !== 'undefined' ? routes[requestData.path] : handlers.notFound;
-
+    
     chosenHandler(requestData, function(statusCode, payload){
             
             //validate statusCode

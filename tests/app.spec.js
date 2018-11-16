@@ -36,15 +36,24 @@ describe('test if app.startServers and app.stopServers is working', function(){
                 });
             }
         });
+        _data.read('acronym', 'SC', function(err){
+            if(!err){
+                _data.delete('acronym', 'SC', function(err){
+                    if(!err){
+                        false;
+                    }
+                });
+            }
+        });
     })
-    it('http server should return status code 200', function(done){
+    it('should return status code 200 for ping to http server', function(done){
         
         http.get('http://localhost:3001/ping', function(res){
             expect(res.statusCode).to.equal(200);
             done();
         });
     });
-    it('test for create endpoint on acronym route', function(){
+    it('should test create endpoint on acronym route', function(done){
 
         chai.request('http://localhost:3001')
             .post('/acronym')
@@ -59,9 +68,28 @@ describe('test if app.startServers and app.stopServers is working', function(){
             }).end(function(err, res){
                 expect(err).to.be.null;
                 expect(res).status(200);
+                done();
             })
     });
-    it('test for update endpoint on acronym route', function(){
+    it('should test create endpoint on acronym route', function(done){
+
+        chai.request('http://localhost:3001')
+            .post('/acronym')
+            .set('Content-Type', 'Application/json')
+            .query({ acronym: 'SC'})
+            .send({
+                "acronym": "SC",
+                "meaning": "Senior Consultant",
+                "description": "Breaking down Objectives into measureable Key Results",
+                "pioneer": "igbannam",
+                "date" : "07/11/2018"
+            }).end(function(err, res){
+                expect(err).to.be.null;
+                expect(res).status(200);
+                done();
+            })
+    });
+    it('should test update endpoint on acronym route', function(done){
 
         chai.request('http://localhost:3001')
             .put('/acronym')
@@ -76,6 +104,54 @@ describe('test if app.startServers and app.stopServers is working', function(){
             }).end(function(err, res){
                 expect(err).to.be.null;
                 expect(res).status(200);
+                done();
+            });
+    });
+    it(' should test for get all data on acronym route', function(done){
+
+        chai.request('http://localhost:3001')
+            .get('/acronym')
+            .end(function(err, res){
+                expect(err).to.be.null;
+                expect(res).status(200);
+                expect(res.body).to.be.not.null;
+                expect(typeof(res.body)).to.be.equal('object');
+                expect(res.body.length).to.be.greaterThan(1);
+                done();
+            });
+    });
+    it('should test get endpoint of acronym route by returning a single acronym', function(done){
+
+        chai.request('http://localhost:3001')
+            .get('/acronym')
+            .query({acronym: "TSM"})
+            .end(function(err, res){
+
+                var testObj = {
+                    "acronym": "TSM",
+                    "meaning": "Technical Success Manager",
+                    "description": "Breaking down Objectives into measureable and  time bound",
+                    "pioneer": "mustapha",
+                    "date" : "07/11/2018"
+                }
+
+                expect(res).status(200);
+                expect(err).to.be.null;
+                expect(res.body).to.be.eql(testObj);
+                
+                done();
+            });
+    });
+    it('should test delete endpoint of acronym route', function(done){
+
+        chai.request('http://localhost:3001')
+            .del('/acronym')
+            .query({acronym: 'TSM'})
+            .end(function(err, res){
+                expect(err).to.be.null;
+                expect(res).status(200);
+
+                done();
             });
     });
 

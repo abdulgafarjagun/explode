@@ -45,16 +45,7 @@ handlers.acronymMethods.post = function(data, callback) {
                 //callback(400, {"Error" : "this acronym already exists"});
                 callback(400, {
                     code : 400, 
-                    data: [
-                        {
-                            id: 76,
-                            name:'erhehrhe'
-                        },
-                        {
-                            id:883,
-                            name:'nsndns'
-                        }
-                    ],
+                    data: [],
                     message:"this acronym already exists",
                     status: 'fail'
                 });
@@ -64,7 +55,12 @@ handlers.acronymMethods.post = function(data, callback) {
                         callback(200);
                     } else {
                         console.log(err);
-                        callback(500, { "Error": "could not create a new acronym"});
+                        callback(500, {
+                            code : 500, 
+                            data: [],
+                            message:"could not create a new acronym",
+                            status: 'fail'
+                        });
                     }
                 });
             }
@@ -80,18 +76,24 @@ handlers.acronymMethods.get = function(data, callback) {
 
     var acronym = typeof(data.queryStringObject.acronym) == 'string' ? data.queryStringObject.acronym.trim() : false;
     
-    console.log(acronym);
-
-    if(acronym){
+     if (acronym) {
         _data.read('acronym', acronym, function(err, data){
             if(!err && data){
                 callback(200, data);
             } else {
-                callback(err, {'Error': 'was not able get data'});
+                callback(404, {'Error': 'acronym you requested was not found'});
             }
         });
     } else {
-        callback(404);
+        if(!acronym){
+            _data.getAllFiles('acronym', function(err, data){
+                if(!err && data){
+                    callback(200, data);
+                } else {
+                    callback(404, {'Error': 'no acronym on record'})
+                }
+            });
+        }
     }
 };
 
@@ -138,6 +140,24 @@ handlers.acronymMethods.put = function(data, callback) {
 //DELETE
 handlers.acronymMethods.delete = function(data, callback) {
 
+    //check if the acronym query has a value
+    acronym = typeof(data.queryStringObject.acronym) === 'string' ? data.queryStringObject.acronym : false;
+    
+    if(acronym){
+        _data.read('acronym', acronym, function(err, data){
+            if(!err && data){
+                _data.delete('acronym', acronym, function(err){
+                    if(!err){
+                        callback(200);
+                    }
+                });
+            } else {
+                callback(404, {"Error": "data to be deleted does not exist"});
+            }
+        });
+    } else {
+        callback(err, {"Error": "General Delete error"});
+    }
 };
 
 //not found handler
